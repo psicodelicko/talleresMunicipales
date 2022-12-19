@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador de Taller</title>
+    <!-- Bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+
+    <!--DATATABLE RESPONSIVE CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.bootstrap5.min.css">
+    <!-- DataTable -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <!-- DATATABLE BUTTONS CSS     -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.5.0/css/select.dataTables.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- NAV -->
+    {% block content %}
+    {% include 'Navbar.html'%}
+    {% endblock %}
+    <!-- FIN NAV -->
+</head>
+<Style>
+    .right {
+        text-align: right !important;
+    }
+
+.a {
+    text-decoration: none !important;
+    }
+
+</Style>
+
+<body>
+    <!-- ----------------------- -->
+<br>
+    <!-- BOTON AGREGAR TALLER -->
+    <div class="container my-3" style="font-family: 'Poppins', sans-serif; 
+    background: #e4321a;
+    background: linear-gradient(to right, #f7aa77, #ff760d, #f7aa77); ">
+        <p class="text-md-center text-light fs-3 fw-bold"> Lista de los talleres que puedes postular </p>
+    </div>
+<br><br>
+    <!-- FIN BOTON AGREGAR TALLER ----------------------- -->
+    <!-- TABLA -->
+    <div class="container md-4"> 
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="title">
+                    <div class="table-responsive">
+                        <table class="table table-striped dt-responsive" style="width:100%;"
+                            id="myTable">
+                            <thead>
+                                <tr>
+                                    <th style="width:5%;"><h4>ID</h4></th>
+                                    <th style="width:30%;"><h4>Nombre Taller</h4></th>
+                                    <th style="width:30%;"><h4>Municipalidad</h4></th>
+                                    <th style="width:10%;"><h4>Cupos</h4></th>
+                                    <th style="width:25%;"><h4>Opciones</h4></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td> <h5>1</h5> </td>
+                                    <td><h5>Yoga</h5></td>
+                                    <td><h5>Puente Alto</h5></td>
+                                    <td><h5>15</h5></td>
+                                    
+                                    <td>
+                                        <button 
+                                        class="btn btn-sm btn-primary" 
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modal1" ><h5>Ver descripción</h5></button>
+                                        <button 
+                                        class="btn btn-sm btn-success">
+                                        <a class="a" class="text-md-center text-light fs-6" style="color: aliceblue"
+                                            href="{%url 'Form_Inscripcion_Taller'%}"><h5>Postular</h5></a></button>                                       
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- TABLE FIN-->
+    <!-- ----------------------- -->
+    <!-- ----------------------- -->
+    <!-- Footer -->
+    {% include 'Footer.html'%}
+    <!-- Footer FIN-->
+    <!-- ----------------------- -->
+    <!-- --MODAL--------->
+    <div tabindex="-1" aria-labelledby="modal1" aria-hidden="true" class="modal fade" id="modal1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="card mb-2">
+                <img src="{% static 'core/img/adulto-mayor-3.jpeg'%}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text text-center fs-3 fw-bold">Taller de Yoga</p>
+                    <p class="card-text text-start fs-4 fw-semibold">Descripción: <hr> </p>
+                    <p class="card-text text-justify fs-4 lh-sm">
+                    El yoga es una práctica que conecta el cuerpo, la respiración y la mente. Esta práctica utiliza posturas físicas, ejercicios de respiración y meditación para mejorar la salud general. El yoga se desarrolló como una práctica espiritual hace miles de años.</p>
+                    <hr>    
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> <p class=" text-start fs-5 fst-italic fw-semibold"> Jornada: Lunes, Miercoles y Viernes </p> </li>
+                    <li class="list-group-item"> <p class=" text-start fs-5 fst-italic fw-semibold"> Horario: 10:00 am - 12:00 pm </p> </li>
+                    <li class="list-group-item"> <p class=" text-start fs-5 fst-italic fw-semibold"> Ubicación: Balmaceda 265, Puente Alto, Región Metropolitana</p> </li>
+                    <li class="list-group-item"> <p class=" text-start fs-5 fst-italic fw-semibold"> Instructor: Yerko Vásquez </p> </li>
+                    <li class="list-group-item"> <p class=" text-start fs-5 fst-italic fw-semibold"> Valor: Gratis</p></li>
+                </div>
+              </div>
+        </div>  
+    </div>
+    
+
+
+    <!-- --FIN MODAL--------->
+    <!-- Bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <!-- jQuery -->
+    <!-- DataTable -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.0/js/responsive.bootstrap5.min.js"></script>
+    <!-- FUNCION Descarga -->
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.5.0/js/dataTables.select.min.js"></script>
+    <!-- FUNCION dataTable -->
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, 'All'],
+                ],
+                dom: 'Bfrtip',
+                buttons: [
+                    
+                    
+                    'excel',
+                    'pdf'
+
+                ],
+                select: false,
+                pageLength: 5,
+                language: {
+                    lengthMenu: "Mostrar _MENU_ registros por página",
+                    zeroRecords: "Ningún usuario encontrado",
+                    info: "Mostrando de _START_ a _END_ de un total de _TOTAL_ registros",
+                    infoEmpty: "Ningún usuario encontrado",
+                    infoFiltered: "(filtrados desde _MAX_ registros totales)",
+                    search: "Buscar:",
+                    loadingRecords: "Cargando...",
+                    paginate: {
+                        first: "Primero",
+                        last: "Último",
+                        next: "Siguiente",
+                        previous: "Anterior"
+                    }
+                },
+            });
+            responsive: true
+            autoWidth: false
+            paging: false
+        });
+    </script>
+</body>
+</html>

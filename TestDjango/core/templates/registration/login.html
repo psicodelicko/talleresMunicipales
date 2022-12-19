@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Inicio Sesion</title>
+</head>
+<header>
+<div>
+    {% include "Navbar.html " %}
+</div>
+
+
+
+</header>
+
+<body>
+
+    {% load crispy_forms_tags %}
+    <br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="car card-body">
+                        <h2 style="text-align: center;">Ingresa tus credenciales</h2>
+                        <hr>
+                        <form action="" method="post">
+                            <div style="text-align: center;">
+                                {% csrf_token %}
+
+                                {{ form | crispy}}
+                            </div>
+                            <br>
+                            <center>
+                                <a href="">Volver a home</a>
+                                <br><br>
+                                <input type="submit" value="ingresar" class="btn btn-success">
+                            </center>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Postulación a instructor</title>
+  <!-- CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+  <!-- NAV -->
+  {% block content %}
+  {% include 'Navbar.html'%}
+  {% endblock %}
+  <!-- FIN NAV -->
+</head>
+
+
+<body>
+  <!-- TITULO -->
+  <div class="container my-4">
+    <div class=" rounded container-fluid  text-black pd-2" style="font-family: 'Poppins', sans-serif; 
+    background: #e4321a;
+    background: linear-gradient(to right, #f7aa77, #ff760d, #f7aa77); ">
+      <p class="text-md-center text-light fs-3">Postula como instructor y se parte de nuestro equipo!</p>
+    </div>
+  </div>
+  <!-- FIN TITULO -->
+  {% load crispy_forms_tags %}
+  <!-- FORMULARIO -->
+  <div class="container my-4">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <form action="" method="post">
+          {% csrf_token %}
+          {{ form | crispy }}
+
+          <br>
+          <div class="input-group">
+            <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+            <!-- <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Button</button> -->
+          </div>
+          <br>
+          <!-- <div class="d-flex justify-content-end"> -->
+          <div class="d-grid gap-2">
+            <input type="submit" class="btn btn-success" value="Enviar Postulación"> 
+            <!-- &nbsp;
+            &nbsp; -->
+            <input type="reset" class="btn btn-warning" value="Limpiar Formulario">
+          </div>
+        </form>
+        <br>
+        {{mensaje}}
+        <br>
+        <div class="d-flex justify-content-start">
+          <a href="{%url 'home'%}" class="btn btn-primary" role="button" data-bs-toggle="button"
+            aria-pressed="true"><i class="fa-sharp fa-solid fa-arrow-left"></i> Volver a página principal</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+<!-- FIN FORMULARIO -->
+<!-- Footer -->
+{% include 'Footer.html'%}
+<!-- Footer FIN-->
+
+</html>
