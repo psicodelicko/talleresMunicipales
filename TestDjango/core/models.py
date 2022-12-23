@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 
@@ -11,6 +13,18 @@ class Material(models.Model):
 
     def __str__(self):
         return self.nombreMaterial
+
+class Taller(models.Model):
+    idTaller = models.AutoField(primary_key=True, verbose_name='Id de taller')
+    nomTaller = models.CharField(max_length=50, null=True,blank=True, verbose_name='Nombre de taller')
+    descripcionTaller = models.CharField(max_length=50, verbose_name='Descripcion de taller')
+    sala = models.IntegerField(verbose_name='Sala de taller')
+    fechaInicio = models.CharField(max_length=50, verbose_name='Fecha inicio')
+    fechaTermino = models.CharField(max_length=50, verbose_name='Fecha termino')
+    instructor = models.ForeignKey(User,null=True,blank=True,on_delete=models.CASCADE)
+
+    def nombreTaller(self):
+        return self.nombreTaller
 
 
 class PostulacionInstr(models.Model):

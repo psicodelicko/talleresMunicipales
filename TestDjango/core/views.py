@@ -1,10 +1,11 @@
 from django.shortcuts import render
+
 from .form import MaterialForm, CustomerUserCreationForm, PostulacionInstrForm, CrearCuentaAdmin,CrearCuentaInstructor
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.core.mail import EmailMessage
-from core.models import Material, PostulacionInstr
+from core.models import Material, PostulacionInstr, Taller
 
 # Create your views here.
 
@@ -52,9 +53,9 @@ def Ins_Taller(request):
 
 
 def Admin_Taller(request):
-    material = Material.objects.all()
+    taller = Taller.objects.all()
     datos = {
-        'material': material
+        'taller': taller
     }
     return render(request, 'core/Admin_Taller.html', datos)
 

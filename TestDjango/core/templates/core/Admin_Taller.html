@@ -78,16 +78,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            
+                                {% for t in taller %}
                                 <tr>
 
-                                    <td>1</td>
-                                    <td>Yoga </td>
-                                    <td>Clases de yoga</td>
-                                    <td>30/11/2022</td>
-                                    <td>30/12/2022</td>
-                                    <td>517</td>
-                                    <td>Juan Pérez</td>
+                                    <td>{{t.idTaller}}</td>
+                                    <td>{{t.nomTaller}}</td>
+                                    <td>{{t.descripcionTaller}}</td>
+                                    <td>{{t.fechaInicio}}</td>
+                                    <td>{{t.fechaTermino}}</td>
+                                    <td>{{t.sala}}</td>
+                                    <td>{{t.instructor}}</td>
 
                                     <td>
                                         <button class="btn btn-sm btn-primary"><i
@@ -96,6 +96,8 @@
                                                 class="fa-solid fa-trash-can"></i></button>
                                     </td>
                                 </tr>
+                                {% endfor %}
+
                             
                             </tbody>
                         </table>
