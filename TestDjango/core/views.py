@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.core.mail import EmailMessage
-from core.models import Material, PostulacionInstr, Taller
+from core.models import Material, PostulacionInstr, Taller , Instructor
 
 # Create your views here.
 
@@ -192,6 +192,8 @@ def AceptarPostulacion(request, id):
     postulacionInstr = PostulacionInstr.objects.get(idPostulacion=id)
     postulacionInstr.estado = "Aceptada"
     postulacionInstr.save()
+    instructor= Instructor
+    instructor.objects.create(nombres=postulacionInstr.nombres,apellidos=postulacionInstr.apellidos,correo=postulacionInstr.correo,direccion=postulacionInstr.direccion,rut=postulacionInstr.rut,estado="Activo")
     nombre = postulacionInstr.nombres+" "+postulacionInstr.apellidos
     email = postulacionInstr.correo
     print(email)
