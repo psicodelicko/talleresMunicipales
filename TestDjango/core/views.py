@@ -193,15 +193,15 @@ def AceptarPostulacion(request, id):
     postulacionInstr.estado = "Aceptada"
     postulacionInstr.save()
     instructor= User
-    instructor.objects.create(first_name=postulacionInstr.nombres,last_name=postulacionInstr.apellidos,email=postulacionInstr.correo,is_superuser=0,is_staff=1,password="12345",username=postulacionInstr.nombres[0:2]+postulacionInstr.apellidos[0:3])
-    userName=postulacionInstr.nombres[0:2]+postulacionInstr.apellidos[0:3]
+    instructor.objects.create(first_name=postulacionInstr.nombres,last_name=postulacionInstr.apellidos,email=postulacionInstr.correo,is_superuser=0,is_staff=1,password="12345",username=postulacionInstr.nombres[0:3]+postulacionInstr.apellidos[0:3])
+    userName=postulacionInstr.nombres[0:3]+postulacionInstr.apellidos[0:3]
     nombre = postulacionInstr.nombres+" "+postulacionInstr.apellidos
     email = postulacionInstr.correo
     print(email)
     i =User.objects.get(username=userName)
     i.set_password('12345')
     i.save()
-    contenido = "¡¡¡Le informamos que su postulación fue aceptada!!!\n\n Para continuar con el proceso, dirigase a nuestras oficinas en:\n  Av. Concha y Toro 1820, 8152857 Puente Alto, Región Metropolitana. \n\n\n ¡Estamos ansiosos de trabajar trabajar con usted! \n\n\n Atte.,\n Dirección de Recursos Humanos. \n Puente Alto."
+    contenido = "¡¡¡Le informamos que su postulación fue aceptada!!!\n\n Para continuar con el proceso, dirigase a nuestras oficinas en:\n  Av. Concha y Toro 1820, 8152857 Puente Alto, Región Metropolitana. \n\n\n ¡Estamos ansiosos de trabajar trabajar con usted! \n Ingrese al siuiente link :\n http://127.0.0.1:8000/accounts/login/ \n\nNombre de usuario : {} \n\n Contraseña : 12345\n\n\n Atte.,\n Dirección de Recursos Humanos. \n Puente Alto.".format(userName)
     email = EmailMessage("Municipalidad de Puente Alto",
                          "Hola! {} :\n\n {}".format(nombre, contenido),
                          '',
