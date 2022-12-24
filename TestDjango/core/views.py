@@ -1,11 +1,11 @@
 from django.shortcuts import render
 
-from .form import MaterialForm, CustomerUserCreationForm, PostulacionInstrForm, CrearCuentaAdmin,CrearCuentaInstructor
+from .form import MaterialForm, CustomerUserCreationForm, PostulacionInstrForm, CrearCuentaAdmin,CrearCuentaInstructor , ModificarUsuario
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.core.mail import EmailMessage
-from core.models import Material, PostulacionInstr, Taller , Instructor
+from core.models import Material, PostulacionInstr, Taller , Instructor , User
 
 # Create your views here.
 
@@ -192,11 +192,15 @@ def AceptarPostulacion(request, id):
     postulacionInstr = PostulacionInstr.objects.get(idPostulacion=id)
     postulacionInstr.estado = "Aceptada"
     postulacionInstr.save()
-    instructor= Instructor
-    instructor.objects.create(nombres=postulacionInstr.nombres,apellidos=postulacionInstr.apellidos,correo=postulacionInstr.correo,direccion=postulacionInstr.direccion,rut=postulacionInstr.rut,estado="Activo")
+    instructor= User
+    instructor.objects.create(first_name=postulacionInstr.nombres,last_name=postulacionInstr.apellidos,email=postulacionInstr.correo,is_superuser=0,is_staff=1,password="12345",username=postulacionInstr.nombres[0:2]+postulacionInstr.apellidos[0:3])
+    userName=postulacionInstr.nombres[0:2]+postulacionInstr.apellidos[0:3]
     nombre = postulacionInstr.nombres+" "+postulacionInstr.apellidos
     email = postulacionInstr.correo
     print(email)
+    i =User.objects.get(username=userName)
+    i.set_password('12345')
+    i.save()
     contenido = "¡¡¡Le informamos que su postulación fue aceptada!!!\n\n Para continuar con el proceso, dirigase a nuestras oficinas en:\n  Av. Concha y Toro 1820, 8152857 Puente Alto, Región Metropolitana. \n\n\n ¡Estamos ansiosos de trabajar trabajar con usted! \n\n\n Atte.,\n Dirección de Recursos Humanos. \n Puente Alto."
     email = EmailMessage("Municipalidad de Puente Alto",
                          "Hola! {} :\n\n {}".format(nombre, contenido),
@@ -204,7 +208,9 @@ def AceptarPostulacion(request, id):
                          [email],
                          reply_to=[email])
     email.send()
-    postulacionInstr = PostulacionInstr.objects.all()
+    datos = {
+        'form': MaterialForm(instance=postulacionInstr)
+    }
     messages.success(request, "Postulación evaluada correctamente")
     return redirect(to="Admin_Postulacion")
 
@@ -226,6 +232,22 @@ def Modificar_Material(request, id):
         }
     return render(request, 'core/Modificar_Material.html', datos)
 
+def Modificar_Instructor(request, idUser):
+    instructor = User.objects.get(id=idUser)
+    datos = {
+        'form': CrearCuentaInstructor(instance=instructor)
+    }
+    if request.method == 'POST':
+        formulario = CrearCuentaInstructor(data=request.POST, instance=instructor)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Cuenta modificado correctamente")
+            return redirect(to="Admin_General")
+        datos = {
+            'form': CrearCuentaInstructor(instance=instructor),
+            'mensaje': "Modificado correctamente"
+        }
+    return render(request, 'core/Modificar_Instructor.html', datos)
 
 def Validar_Postulacion(request, id):
     postulacionInstr = PostulacionInstr.objects.get(idPostulacion=id)
@@ -322,7 +344,6 @@ def Registro_Cuenta_Instructor(request):
         formulario = CrearCuentaInstructor(data=request.POST)
         if formulario.is_valid():
             formulario.cleaned_data['IS_SUPERUSER']=0
-            formulario.cleaned_data['IS_STAFF']=1
             formulario.save()
             messages.success(request, "Cuenta creada correctamente")
             return redirect(to="home")
