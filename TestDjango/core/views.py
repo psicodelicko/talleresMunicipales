@@ -232,8 +232,8 @@ def Modificar_Material(request, id):
         }
     return render(request, 'core/Modificar_Material.html', datos)
 
-def Modificar_Instructor(request, idUser):
-    instructor = User.objects.get(id=idUser)
+def Modificar_Instructor(request, id):
+    instructor = User.objects.get(username=id)
     datos = {
         'form': CrearCuentaInstructor(instance=instructor)
     }

@@ -57,6 +57,7 @@ style="font-family: 'Poppins', sans-serif; background: linear-gradient(to right,
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{% url 'Ins_Taller' %}"><p class="text-md-center text-black fs-5 fw-bold" >Postula a los Talleres</p></a>
                     </li>
+                    {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
                         <a 
                         class="nav-link dropdown-toggle" 
@@ -67,8 +68,11 @@ style="font-family: 'Poppins', sans-serif; background: linear-gradient(to right,
                         </a>
                         <ul class="dropdown-menu" style="font-family: 'Poppins', sans-serif; background: #e4a71a;background: linear-gradient(to right, #aca4a0, #c0b9b2, #aca4a0)">
                             <li><a class="dropdown-item" href="{% url 'Form_Evaluacion'%}"><p class="text-md-center text-black fs-5" >Evaluar Taller</p></a></li>
+                            <li><a class="dropdown-item" href="http://127.0.0.1:8000/Modificar_Instructor/{{user.username}}/"><p class="text-md-center text-black fs-5" >Ver perfil</p></a></li>
+
                         </ul>
                     </li>
+                    {% endif %}
                     {% if user.is_superuser %}
                     <li class="nav-item dropdown">
                         <a 
@@ -144,6 +148,8 @@ style="font-family: 'Poppins', sans-serif; background: linear-gradient(to right,
                 </ul>
 
                 <div class="d-flex justify-content-end">
+
+                 
                     {% if user.is_authenticated %}
                     <button class="btn btn-primary">
                         <a href="{% url 'logout' %}" style="margin-left:  5px;" >
