@@ -293,6 +293,7 @@ def registro(request):
     if request.method == 'POST':
         formulario = CustomerUserCreationForm(data=request.POST)
         if formulario.is_valid():
+            print(formulario.cleaned_data["username"])
             formulario.save()
             messages.success(request, "Te has registrado correctamente")
             user = authenticate(
@@ -302,6 +303,14 @@ def registro(request):
         data["form"] = formulario
     return render(request, 'registration/registro.html', data)
 
+def buscarUsuario(rutBsc, rutBd):
+    if(rutBsc==rutBd):
+        mensaje="El rut ya se encuentra ingresado"
+        flag=True
+    else:
+        mensaje="Se ha registrado correctamente"
+        flag=False
+    return flag
 
 def Ver_Material(request, id):
     material = Material.objects.get(idMaterial=id)
