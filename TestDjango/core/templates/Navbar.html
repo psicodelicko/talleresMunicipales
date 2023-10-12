@@ -28,13 +28,13 @@
 
 <!-- nav -->
 <div class="p-2 a"
-style="font-family: 'Poppins', sans-serif; background: linear-gradient(to right,  #edb691, #eb991e, #edb691)">
+style="font-family: 'Poppins', sans-serif; background: linear-gradient(to right,  #91a0ed, #1ec6eb, #91a0ed)">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid d-flex justify-content-end">
             <div class="col-md-1 text-center">
-                <p class="fs-6 fw-bold">Municipalidad</p>
+                <p class="fs-6 fw-bold">Tercera Edad</p>
                 <hr>
-                <p class="fs-6 fw-bold">Puente Alto</p>
+                <p class="fs-6 fw-bold">Emprende</p>
             </div>
             <button 
                 class="navbar-toggler" 
@@ -52,10 +52,16 @@ style="font-family: 'Poppins', sans-serif; background: linear-gradient(to right,
                             <p class="text-md-center text-black fs-5 fw-bold" >Página Principal</p></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'Form_Instructor_Taller' %}"><p class="text-md-center text-black fs-5 fw-bold"" >Se parte de nuestro Equipo</p></a>
+                        <a class="nav-link" aria-current="page" href="{% url 'Form_Instructor_Taller' %}"><p class="text-md-center text-black fs-5 fw-bold" >Emprede con nostros</p></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'Ins_Taller' %}"><p class="text-md-center text-black fs-5 fw-bold" >Postula a los Talleres</p></a>
+                        <a class="nav-link" aria-current="page" href="{% url 'Ins_Taller' %}"><p class="text-md-center text-black fs-5 fw-bold" >Productos</p></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{% url 'Ins_Taller' %}"><p class="text-md-center text-black fs-5 fw-bold" >Servicios</p></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{% url 'Ins_Taller' %}"><p class="text-md-center text-black fs-5 fw-bold" >Emprendedores</p></a>
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
